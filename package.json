@@ -1,0 +1,42 @@
+{
+  "name": "@mesa-engine/core",
+  "description": "An entity-component-system engine built with typescript.",
+  "private": false,
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": {
+    "name": "Aaron Sorensen",
+    "email": "ThatDevGuyAaron@gmail.com"
+  },
+  "scripts": {
+    "precommit": "npm run build && npm run docs && npm test",
+    "prepush": "npm test",
+    "test": "mocha -r ts-node/register src/**/*.spec.ts",
+    "build": "./node_modules/.bin/tsc",
+    "docs": "typedoc --out docs --mode modules --module commonjs --target es5"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "chai": "^4.2.0",
+    "sinon": "^7.3.2",
+    "husky": "^2.2.0",
+    "mocha": "^6.1.4",
+    "ts-node": "^8.1.0",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.4.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mesa-engine/core.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mesa-engine/core/issues"
+  },
+  "homepage": "https://github.com/mesa-engine/core#readme",
+  "keywords": [
+    "ecs",
+    "mesa-engine"
+  ]
+}
