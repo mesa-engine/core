@@ -1,6 +1,5 @@
 import { Entity } from "./entity";
 import { System } from "./system";
-import { EntityFactory } from "./entity-factory";
 import { Blueprint, BlueprintClass } from "./blueprint";
 
 interface EngineEntityListener {
@@ -22,15 +21,34 @@ class Engine {
   private readonly _systems: System[] = [];
   /** Checks if the system needs sorting of some sort */
   private _systemsNeedSorting: boolean = false;
-  /** Factory for creating entities based off blueprints */
-  private _entityFactory: EntityFactory = new EntityFactory();
 
   /**
    * Builds entity from blueprint.
    * @param blueprintClass Blueprint to create entity from.
    */
-  public buildEntity<T extends Blueprint>(blueprintClass: BlueprintClass<T>): Entity { 
-    return this._entityFactory.buildEntity(blueprintClass);
+  public buildEntity<T extends Blueprint>(blueprintClass: BlueprintClass<T>): Entity {
+    return this.getEntityFromBlueprint(new blueprintClass(), new Entity());
+  }
+  /**
+ * Recursively add components from blueprint to entity.
+ * @param blueprintClass The name of blueprint to build the entity from.
+ * @param entity Entity to add components to. 
+ */
+  private getEntityFromBlueprint<T extends Blueprint>(blueprint: T, entity: Entity): Entity {
+    if (blueprint.blueprints) {
+      blueprint.blueprints.forEach(inheritedBlueprint => {
+        entity = this.getEntityFromBlueprint(inheritedBlueprint, entity);
+      });
+    }
+
+    blueprint.components.forEach(x => {
+      entity.putComponent(<any>x.component);
+      if (x.values) {
+        Object.assign(entity.getComponent(<any>x.component), x.values);
+      }
+    });
+
+    return entity;
   }
   /**
    * Computes an immutable list of entities added to the engine.

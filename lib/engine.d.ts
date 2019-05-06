@@ -1,6 +1,6 @@
 import { Entity } from "./entity";
 import { System } from "./system";
-import { Blueprint } from "./blueprint";
+import { Blueprint, BlueprintClass } from "./blueprint";
 interface EngineEntityListener {
     onEntityAdded(entity: Entity): void;
     onEntityRemoved(entity: Entity): void;
@@ -10,10 +10,8 @@ declare class Engine {
     private readonly _entityListeners;
     private readonly _systems;
     private _systemsNeedSorting;
-    private entityFactory;
-    private blueprintTypes;
-    constructor(components: any, blueprints: Blueprint[], blueprintTypes?: any);
-    buildEntity(type: string | number): Entity;
+    private _entityFactory;
+    buildEntity<T extends Blueprint>(blueprintClass: BlueprintClass<T>): Entity;
     readonly entities: readonly Entity[];
     notifyPriorityChange(system: System): void;
     addEntityListener(listener: EngineEntityListener): this;
