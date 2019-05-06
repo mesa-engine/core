@@ -1,7 +1,7 @@
 import { Entity } from "./entity";
 import { System } from "./system";
 import { EntityFactory } from "./entity-factory";
-import { Blueprint } from "./blueprint";
+import { Blueprint, BlueprintClass } from "./blueprint";
 
 interface EngineEntityListener {
   onEntityAdded(entity: Entity): void;
@@ -23,34 +23,14 @@ class Engine {
   /** Checks if the system needs sorting of some sort */
   private _systemsNeedSorting: boolean = false;
   /** Factory for creating entities based off blueprints */
-  private entityFactory: EntityFactory;
-  /** Enum of all blueprints for type checking purposes */
-  private blueprintTypes;
+  private _entityFactory: EntityFactory = new EntityFactory();
 
   /**
-   * Constructs new engine.
-   * @param blueprints Array of blueprints.
-   * @param components Exported module containing all components.
-   * @param blueprintTypes Optional enum of blueprint types for type checking. 
-   */
-  constructor(components, blueprints: Blueprint[], blueprintTypes?) {
-    this.entityFactory = new EntityFactory(blueprints, components);
-    this.blueprintTypes = blueprintTypes ? blueprintTypes : undefined;
-  }
-  /**
    * Builds entity from blueprint.
-   * @param type The enum type or name of blueprint to create entity from. 
-   * @throws if the type doesn't match any added blueprintTypes.
+   * @param blueprintClass Blueprint to create entity from.
    */
-  buildEntity(type: string | number): Entity {
-    if(this.blueprintTypes) {
-      if(!this.blueprintTypes[type]) {
-        throw new Error(`Invalid blueprint type: ${type}`); 
-      } else {
-        type = this.blueprintTypes[type];
-      }
-    }
-    return this.entityFactory.buildEntity(<string>type);
+  public buildEntity<T extends Blueprint>(blueprintClass: BlueprintClass<T>): Entity { 
+    return this._entityFactory.buildEntity(blueprintClass);
   }
   /**
    * Computes an immutable list of entities added to the engine.
