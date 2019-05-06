@@ -10,8 +10,8 @@ declare class Engine {
     private readonly _entityListeners;
     private readonly _systems;
     private _systemsNeedSorting;
-    private _entityFactory;
     buildEntity<T extends Blueprint>(blueprintClass: BlueprintClass<T>): Entity;
+    private getEntityFromBlueprint;
     readonly entities: readonly Entity[];
     notifyPriorityChange(system: System): void;
     addEntityListener(listener: EngineEntityListener): this;
