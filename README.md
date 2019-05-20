@@ -10,16 +10,16 @@ The Mesa CLI includes helpful commands to generate new projects as well as scaff
 
 New project using CLI (recommended)
 ```sh
-npm install -g @mesa-engine/cli
-mesa new my-app
-cd my-app
-npm install
-mesa run
+$ npm install -g @mesa-engine/cli
+$ mesa new my-app
+$ cd my-app
+$ npm install
+$ mesa run
 ```
 
 Add into existing project
 ```sh
-npm install @mesa-engine/core
+$ npm install @mesa-engine/core
 ```
 
 ## Basic Usage  
