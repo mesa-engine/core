@@ -5,12 +5,12 @@ type EntityChangeListener = (entity: Entity) => any;
 /**
  * An Entity is every object you may have in your game.
  * A character, a weapon, an skill, a map.
- * Everything is an Entity.
- * Entities are bag of Components, and Components describe how the data exists on
- * the entities.
+ * Everything is an entity.
+ * Entities are a bag of components, and components describe 
+ * how the data exists on the entities.
  * Entities have an id field that can only be set once and
  * will throw when you try to get one when no id is set.
- * This set can be used to persist the entity on a database.
+ * This set can be used to persist the entities on a database.
  */
 class Entity {
   private _id: string | number | null = null;
@@ -64,7 +64,7 @@ class Entity {
   }
 
   /**
-   * Generates a read only list of components of the entity
+   * Generates a read-only list of components of the entity
    * with it's corresponding types.
    * @returns a list of all components with types of the entity.
    */

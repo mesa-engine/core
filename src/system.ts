@@ -1,5 +1,11 @@
 import { Engine } from "./Engine";
 
+/**
+ * A system is where all logic resides for your application.
+ * Systems tend to be singletons that have little to no state of their own.
+ * Typically systems iterate over one or more entities on update
+ * and perform operations using the entities component data. 
+ */
 abstract class System {
   private _priority: number;
   private readonly _engines: Engine[];

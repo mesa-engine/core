@@ -4,7 +4,7 @@ import { Entity } from "./entity";
 
 /**
  * A family is a criteria to separate your entities.
- * You can have families on wich entities must have a component,
+ * You can have families on which entities must have a component,
  * entities cannot have some components or a mix of both.
  * Families also cache the entities of the engine by default,
  * so you won't have to worry about filtering entities every time.
@@ -12,7 +12,7 @@ import { Entity } from "./entity";
 interface Family {
   /**
    * Computes a list of entities on the family.
-   * The list may or may not be cached, depending of implementation.
+   * The list may or may not be cached, depending on instantiation.
    */
   readonly entities: ReadonlyArray<Entity>;
   includesEntity(entity: Entity): boolean;
@@ -60,9 +60,8 @@ abstract class AbstractFamily implements Family {
 }
 
 /**
- * A CachedFamily is a family than caches it's results and alters it only
+ * A CachedFamily is a family that caches it's results and alters it only
  * when an entity changes.
- *
  */
 class CachedFamily extends AbstractFamily {
   private _needEntityRefresh: boolean;
@@ -121,8 +120,8 @@ class CachedFamily extends AbstractFamily {
 
 /**
  * A NonCacheFamily always computes the members of it.
- * If you find than the performance from cached families is not decent.
- * You can use this instead.
+ * If you find than the performance from cached families 
+ * is not adequate, you can use this instead.
  * @private
  */
 class NonCachedFamily extends AbstractFamily {
@@ -132,7 +131,7 @@ class NonCachedFamily extends AbstractFamily {
 }
 
 /**
- * Utility class to build Families.
+ * Utility class to build families.
  * It's the only way to create the implementations of CachedFamily and NonCachedFamily.
  */
 class FamilyBuilder {
@@ -149,8 +148,8 @@ class FamilyBuilder {
   }
 
   /**
-   * Indicates than entities than are members of this class MUST
-   * HAVE this components.
+   * Indicates the entities that are members of this family MUST
+   * HAVE these components.
    * @param classes A list of component classes.
    */
   include(...classes: ComponentClass<Component>[]) {
@@ -158,8 +157,8 @@ class FamilyBuilder {
     return this;
   }
   /**
-   * Indicates than entities than are members of this class MUST NOT
-   * HAVE this components.
+   * Indicates the entities that are members of this family MUST NOT
+   * HAVE these components.
    * @param classes A list of component classes.
    */
   exclude(...classes: ComponentClass<Component>[]) {
@@ -180,7 +179,7 @@ class FamilyBuilder {
 
   /**
    * Changes if the family should use cached values or not.
-   * @param cached If the family must use or not a cache.
+   * @param cached If the family is or is not cached.
    */
   setCached(cached: boolean) {
     this._cached = cached;
