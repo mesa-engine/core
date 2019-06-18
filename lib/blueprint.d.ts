@@ -5,7 +5,7 @@ export interface Blueprint {
 }
 export interface BlueprintComponent {
     component: Component;
-    values?: any;
+    value?: any;
 }
 export interface BlueprintClass<T extends Blueprint> {
     new (): T;

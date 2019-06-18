@@ -2,7 +2,7 @@
   "name": "@mesa-engine/core",
   "description": "An entity-component-system engine built with typescript.",
   "private": false,
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "index.js",
   "author": {
     "name": "Aaron Sorensen",

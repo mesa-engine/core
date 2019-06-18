@@ -55,14 +55,14 @@ describe("Engine works", function () {
 
         class Base implements Blueprint {
             components = [
-                {component: TestComponent1, values: {value: 'baseChanged'}},
-                {component: TestComponent2, values: {value: 'baseChanged'}},
+                {component: TestComponent1, value: {value: 'baseChanged'}},
+                {component: TestComponent2, value: {value: 'baseChanged'}},
                 {component: TestComponent3}
             ];
         }
 
         class Inherits implements Blueprint {
-            components = [{ component: TestComponent2, values: { value: 'inheritsChanged' } }];
+            components = [{ component: TestComponent2, value: { value: 'inheritsChanged' } }];
             blueprints = [new Base];
         }
 

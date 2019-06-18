@@ -43,8 +43,8 @@ class Engine {
 
     blueprint.components.forEach(x => {
       entity.putComponent(<any>x.component);
-      if (x.values) {
-        Object.assign(entity.getComponent(<any>x.component), x.values);
+      if (x.value) {
+        Object.assign(entity.getComponent(<any>x.component), x.value);
       }
     });
 
